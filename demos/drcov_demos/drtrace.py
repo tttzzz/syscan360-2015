@@ -29,7 +29,7 @@ def bruteforce(file_offset,file_len,initials):
     # file_offset == len(initials)
     
     if len(initials) != file_offset:
-        print "we will trim the list", [hex(x) for x in initials]
+        print "lim", [hex(x) for x in initials]
     
     while len(initials) > file_offset:
         del initials[-1]
@@ -41,7 +41,6 @@ def bruteforce(file_offset,file_len,initials):
         os.remove(f)
     
     for i in range(256):
-        #print "Generating trace #", i
 
         # initialize buffer
         s = ''
@@ -78,10 +77,6 @@ def bruteforce(file_offset,file_len,initials):
             #readelf
             args.append("readelf")
             args.append("-a")
-            #exif
-            #args.append("exif")
-            #crasher
-            #args.append("./crasher")
             #unzip
             #args.append("unzip")
             #nm
@@ -92,11 +87,7 @@ def bruteforce(file_offset,file_len,initials):
             args.append("seed.elf")
             # exec
             out = subprocess.check_output(args,stderr=subprocess.PIPE)
-
-            #print out
-            #print len(out.split("\n"))
         except subprocess.CalledProcessError as e:
-            #print "[log]CalledProcessError", e.output.strip("\n")
             pass
 
         # check file and rename
@@ -112,7 +103,6 @@ def bruteforce(file_offset,file_len,initials):
     offsets = []
     for offset in v:
         offsets.append(offset[0])
-    #print "\nOffsets", [hex(v) for v in offsets]
     
     return offsets
 #--------------------------------------------------------------------------------------------------------------------------------------------------
